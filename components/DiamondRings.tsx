@@ -1,5 +1,5 @@
 /**
- * The three nested dotted rhombuses ("rombuses" in the Figma).
+ * The three nested dotted rhombuses.
  * Default sizes match the testing / select screens: 602, 682, 762 px at 1920 wide.
  * Each one shrinks on small screens and spins slowly at its own speed.
  */
