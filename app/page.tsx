@@ -16,7 +16,7 @@ export default function Home() {
       {(["left", "right"] as const).map((side) => (
         <div
           key={side}
-          className={`absolute top-1/2 hidden -translate-y-1/2 transition-opacity duration-500 lg:block ${
+          className={`absolute top-1/2 z-20 hidden -translate-y-1/2 transition-opacity duration-500 lg:block ${
             side === "left" ? "left-0" : "right-0"
           } ${hover && hover !== side ? "opacity-0" : "opacity-100"}`}
           onMouseEnter={() => setHover(side)}
