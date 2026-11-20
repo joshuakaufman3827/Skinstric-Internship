@@ -1,0 +1,9 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "Skinstric", "skinstric", "personalised", "Roobert", "rombuses", "rhombuses",
+    "dvh", "SQRT", "cloudfunctions", "frontend", "SUCCUSS", "Latino", "tsbuildinfo"
+  ],
+  "ignorePaths": ["node_modules", ".next", "package-lock.json"]
+}

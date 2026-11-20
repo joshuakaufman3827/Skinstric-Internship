@@ -1,8 +1,15 @@
 /**
- * The three nested dotted rhombuses.
- * Default sizes match the testing / select screens: 602, 682, 762 px at 1920 wide.
- * Each one shrinks on small screens and spins slowly at its own speed.
+ * Figma sizes are tip-to-tip widths on a 1920px-wide frame.
+ * Side of the square = width / √2. Scale with the screen like the Figma,
+ * never larger than the Figma size, and not too small on phones.
  */
+function sideWidth(figmaWidth: number) {
+  const side = figmaWidth / Math.SQRT2;
+  const vw = (side / 1920) * 100;
+  return `clamp(${Math.round(side * 0.45)}px, ${vw.toFixed(2)}vw, ${Math.round(side)}px)`;
+}
+
+/** The three nested dotted rhombuses. */
 export default function DiamondRings({
   sizes = [602, 682, 762],
   spin = false,
@@ -24,7 +31,8 @@ export default function DiamondRings({
           key={i}
           className={`rhombus ${spin ? "rhombus-spin" : ""}`}
           style={{
-            width: `min(${s}px, ${Math.round((s / 762) * 78)}vw)`,
+            width: sideWidth(s),
+            height: sideWidth(s),
             transform: "rotate(45deg)",
             opacity: opacities[i],
             animationDuration: `${speeds[i]}s`,

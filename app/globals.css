@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Values taken from the Skinstric Figma file (1920 × 960 frames) */
-@theme {
+@theme inline {
   --color-ink: #1a1b1c;
   --color-mute: #a0a4ab;
   --color-panel: #f3f3f4;

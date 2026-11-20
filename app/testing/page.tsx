@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import DiamondButton from "@/components/DiamondButton";
@@ -37,7 +37,7 @@ export default function TestingPage() {
   const label = isName ? "name" : "city";
   const valid = validateText(value, label) === null;
 
-  async function handleSubmit(e?: FormEvent) {
+  async function handleSubmit(e?: { preventDefault: () => void }) {
     e?.preventDefault();
     if (step !== "name" && step !== "location") return;
 
@@ -91,7 +91,7 @@ export default function TestingPage() {
         ) : (
           <>
             <DiamondRings />
-            <div className="relative z-10 flex w-full max-w-[460px] flex-col items-center text-center">
+            <div className="relative z-10 flex w-full max-w-[680px] flex-col items-center text-center">
               {step === "done" ? (
                 <div className="fade-up">
                   <p className="text-[clamp(1.75rem,4vw,2.5rem)] font-light tracking-tight">Thank you!</p>
@@ -100,20 +100,27 @@ export default function TestingPage() {
               ) : (
                 <form key={step} onSubmit={handleSubmit} noValidate className="fade-up w-full">
                   <p className="mb-1 text-sm uppercase leading-6 text-mute">{hint}</p>
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    autoComplete={isName ? "name" : "address-level2"}
-                    value={value}
-                    onChange={(e) => {
-                      setValue(e.target.value);
-                      if (error) setError(null);
-                    }}
-                    placeholder={isName ? "Introduce Yourself" : "Where are you from?"}
-                    aria-label={isName ? "Your name" : "Your city"}
-                    aria-invalid={!!error}
-                    className="mx-auto block w-full max-w-[420px] border-b border-ink bg-transparent text-center text-[clamp(2rem,6vw,3.75rem)] font-light leading-[64px] tracking-[-0.07em] text-ink outline-none placeholder:text-ink"
-                  />
+                  {/* The underline hugs the text: an invisible copy of the text sets the width (inline-grid trick) */}
+                  <div className="mx-auto inline-grid max-w-full border-b border-ink text-[clamp(2rem,3.125vw,3.75rem)] font-light leading-[1.07] tracking-[-0.05em]">
+                    <span aria-hidden className="invisible col-start-1 row-start-1 whitespace-pre px-1">
+                      {value || (isName ? "Introduce Yourself" : "Where are you from?")}
+                    </span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      size={1}
+                      autoComplete={isName ? "name" : "address-level2"}
+                      value={value}
+                      onChange={(e) => {
+                        setValue(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      placeholder={isName ? "Introduce Yourself" : "Where are you from?"}
+                      aria-label={isName ? "Your name" : "Your city"}
+                      aria-invalid={!!error}
+                      className="col-start-1 row-start-1 w-full min-w-0 bg-transparent px-1 text-center text-ink outline-none placeholder:text-ink"
+                    />
+                  </div>
                   <p className="mt-3 min-h-5 text-sm text-red-600" role="alert">
                     {error}
                   </p>
