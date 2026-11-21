@@ -1,0 +1,5 @@
+{
+  // Tailwind IntelliSense: don't nag about writing w-[316px] as w-79 etc.
+  // Both forms produce the same CSS; the px values match the Figma.
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore"
+}

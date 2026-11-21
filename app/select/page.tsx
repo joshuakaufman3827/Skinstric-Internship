@@ -48,7 +48,8 @@ export default function SelectPage() {
                 {t.label}
               </span>
             );
-            const size = "flex h-[104px] w-[104px] items-center justify-center sm:h-[154px] sm:w-[154px]";
+            // Figma tile: 154px square at 1920 wide = 8.02vw. Scale with the screen like the rings do.
+            const size = "flex h-[clamp(80px,8.02vw,154px)] w-[clamp(80px,8.02vw,154px)] items-center justify-center";
             return "href" in t ? (
               <Link
                 key={t.label}
