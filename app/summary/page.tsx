@@ -181,7 +181,7 @@ export default function SummaryPage() {
                     type="button"
                     onClick={() => choose(key)}
                     aria-pressed={isSel}
-                    className={`flex h-12 w-full items-center justify-between px-4 text-sm leading-6 transition-colors sm:text-base ${
+                    className={`flex h-12 w-full items-center justify-between px-4 lg:h-[clamp(36px,5vh,48px)] text-sm leading-6 transition-colors sm:text-base ${
                       isSel ? "bg-ink text-white" : "hover:bg-panel-hover"
                     }`}
                   >
