@@ -97,13 +97,13 @@ export default function SummaryPage() {
   const C = 2 * Math.PI * R;
 
   return (
-    <main className="flex min-h-dvh flex-col">
+    <main className="flex min-h-dvh flex-col lg:h-dvh lg:overflow-hidden">
       <Header section="ANALYSIS" />
 
       <div className="px-4 pt-[22px] sm:px-8">
         <p className="text-base font-semibold uppercase leading-6">A. I. Analysis</p>
         <div className="mt-1 flex items-center gap-6">
-          <h1 className="text-[clamp(2.5rem,7vw,4.5rem)] font-light uppercase leading-[64px] tracking-[-0.06em]">
+          <h1 className="text-[clamp(2.5rem,3.75vw,4.5rem)] font-light uppercase leading-[0.9] tracking-[-0.06em]">
             Demographics
           </h1>
           <div className="hidden items-center gap-4 sm:flex">
@@ -115,7 +115,8 @@ export default function SummaryPage() {
       </div>
 
       {/* 208 / 1168 / 448 columns with 16px gaps at 1920 wide */}
-      <section className="grid flex-1 gap-4 px-4 pb-4 pt-6 sm:px-8 md:grid-cols-[208fr_1168fr_448fr] md:pt-[90px] lg:max-h-[634px]">
+      {/* lg: fills the space left on screen (min-h-0 lets it shrink) so the page fits like the Figma */}
+      <section className="grid flex-1 gap-4 px-4 pb-4 pt-6 sm:px-8 md:grid-cols-[208fr_1168fr_448fr] md:pt-[clamp(16px,5vh,90px)] lg:min-h-0">
         {/* Left: the user's actual attributes — click to show that category */}
         <div className="grid grid-cols-3 gap-2 md:flex md:flex-col">
           {CATEGORIES.map((c) => (
@@ -135,13 +136,14 @@ export default function SummaryPage() {
         </div>
 
         {/* Center: selected value + confidence ring */}
-        <div className="relative flex min-h-[340px] flex-col border-t border-ink bg-panel p-4 md:min-h-[544px]">
+        <div className="relative flex min-h-[340px] flex-col border-t border-ink bg-panel p-4 lg:min-h-0">
           <p className="text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-10 tracking-[-0.04em]">
             {titleCase(activeValue)}
             {active === "age" && " y.o."}
           </p>
           <div className="flex flex-1 items-end justify-center md:justify-end">
-            <div className="relative h-[240px] w-[240px] sm:h-[300px] sm:w-[300px] xl:h-[384px] xl:w-[384px]">
+            {/* Figma ring: 384px on a 960px-tall frame = 40vh; never larger than 384px or 20vw */}
+            <div className="relative aspect-square w-[240px] sm:w-[300px] lg:w-[min(384px,40vh,20vw)]">
               <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90" aria-hidden>
                 <circle cx="50" cy="50" r={R} fill="none" stroke="#c1c2c3" strokeWidth="0.6" />
                 <circle
@@ -165,7 +167,7 @@ export default function SummaryPage() {
         </div>
 
         {/* Right: AI confidence, highest first — click a row to correct it */}
-        <div className="border-t border-ink bg-panel pb-4">
+        <div className="border-t border-ink bg-panel pb-4 lg:min-h-0 lg:overflow-y-auto">
           <div className="flex justify-between px-4 py-[14px] text-sm font-medium uppercase leading-6 sm:text-base">
             <span>{CATEGORY_LABEL[active]}</span>
             <span>A. I. Confidence</span>
