@@ -143,6 +143,14 @@ export default function CameraPage() {
         <img src={photo} alt="Your selfie" className="absolute inset-0 h-full w-full object-cover" />
       )}
 
+      {/* Soft dark fades at top and bottom so white text stays readable over bright backgrounds */}
+      {dark && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.45),transparent_18%,transparent_72%,rgba(0,0,0,0.5))]"
+        />
+      )}
+
       <div className="relative z-10 flex h-full flex-col">
         <Header section="ANALYSIS" light={dark} />
 
