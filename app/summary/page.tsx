@@ -97,7 +97,7 @@ export default function SummaryPage() {
   const C = 2 * Math.PI * R;
 
   return (
-    <main className="flex min-h-dvh flex-col lg:h-dvh lg:overflow-hidden">
+    <main className="flex min-h-dvh flex-col xl:h-dvh xl:overflow-hidden">
       <Header section="ANALYSIS" />
 
       <div className="px-4 pt-[22px] sm:px-8">
@@ -115,8 +115,8 @@ export default function SummaryPage() {
       </div>
 
       {/* 208 / 1168 / 448 columns with 16px gaps at 1920 wide */}
-      {/* lg: fills the space left on screen (min-h-0 lets it shrink) so the page fits like the Figma */}
-      <section className="grid flex-1 gap-4 px-4 pb-4 pt-6 sm:px-8 md:grid-cols-[208fr_1168fr_448fr] md:pt-[clamp(16px,5vh,90px)] lg:min-h-0">
+      {/* xl (1280px+): fills the space left on screen (min-h-0 lets it shrink) so the page fits like the Figma */}
+      <section className="grid flex-1 gap-4 px-4 pb-4 pt-6 sm:px-8 md:grid-cols-[1fr_3fr] xl:grid-cols-[208fr_1168fr_448fr] md:pt-[clamp(16px,5vh,90px)] xl:min-h-0">
         {/* Left: the user's actual attributes — click to show that category */}
         <div className="grid grid-cols-3 gap-2 md:flex md:flex-col">
           {CATEGORIES.map((c) => (
@@ -129,21 +129,21 @@ export default function SummaryPage() {
                 active === c ? "bg-ink text-white" : "bg-panel hover:bg-panel-hover"
               }`}
             >
-              <span className="truncate">{valueFor(c)}</span>
+              <span className="text-xs leading-4 sm:text-base sm:leading-6">{valueFor(c)}</span>
               <span>{CATEGORY_LABEL[c]}</span>
             </button>
           ))}
         </div>
 
         {/* Center: selected value + confidence ring */}
-        <div className="relative flex min-h-[340px] flex-col border-t border-ink bg-panel p-4 lg:min-h-0">
+        <div className="relative flex min-h-[340px] flex-col border-t border-ink bg-panel p-4 xl:min-h-0">
           <p className="text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-10 tracking-[-0.04em]">
             {titleCase(activeValue)}
             {active === "age" && " y.o."}
           </p>
           <div className="flex flex-1 items-end justify-center md:justify-end">
             {/* Figma ring: 384px on a 960px-tall frame = 40vh; never larger than 384px or 20vw */}
-            <div className="relative aspect-square w-[240px] sm:w-[300px] lg:w-[min(384px,40vh,20vw)]">
+            <div className="relative aspect-square w-[240px] sm:w-[300px] xl:w-[min(384px,40vh,20vw)]">
               <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90" aria-hidden>
                 <circle cx="50" cy="50" r={R} fill="none" stroke="#c1c2c3" strokeWidth="0.6" />
                 <circle
@@ -167,8 +167,9 @@ export default function SummaryPage() {
         </div>
 
         {/* Right: AI confidence, highest first — click a row to correct it */}
-        <div className="border-t border-ink bg-panel pb-4 lg:min-h-0 lg:overflow-y-auto">
-          <div className="flex justify-between px-4 py-[14px] text-sm font-medium uppercase leading-6 sm:text-base">
+        {/* tablet: full-width row under the other two; desktop: its own column */}
+        <div className="border-t border-ink bg-panel pb-4 md:col-span-2 xl:col-span-1 xl:min-h-0 xl:overflow-y-auto">
+          <div className="flex justify-between gap-4 px-4 py-[14px] text-sm font-medium uppercase leading-6 sm:text-base">
             <span>{CATEGORY_LABEL[active]}</span>
             <span>A. I. Confidence</span>
           </div>
@@ -181,7 +182,7 @@ export default function SummaryPage() {
                     type="button"
                     onClick={() => choose(key)}
                     aria-pressed={isSel}
-                    className={`flex h-12 w-full items-center justify-between px-4 lg:h-[clamp(36px,5vh,48px)] text-sm leading-6 transition-colors sm:text-base ${
+                    className={`flex h-12 w-full items-center justify-between px-4 xl:h-[clamp(36px,5vh,48px)] text-sm leading-6 transition-colors sm:text-base ${
                       isSel ? "bg-ink text-white" : "hover:bg-panel-hover"
                     }`}
                   >

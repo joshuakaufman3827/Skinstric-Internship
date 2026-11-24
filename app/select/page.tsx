@@ -44,7 +44,7 @@ export default function SelectPage() {
         <div className="relative z-10 grid rotate-45 grid-cols-2 grid-rows-2 gap-[6px]">
           {tiles.map((t) => {
             const inner = (
-              <span className="-rotate-45 px-2 text-center text-xs font-semibold uppercase leading-5 sm:text-base sm:leading-6">
+              <span className="-rotate-45 px-1 text-center text-[clamp(10px,0.83vw,16px)] font-semibold uppercase leading-[1.4]">
                 {t.label}
               </span>
             );
